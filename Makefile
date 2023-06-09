@@ -2,8 +2,8 @@
 
 ORG_NAME := hihg-um
 PROJECT_NAME ?= julia
-OS_BASE ?= ubuntu
-OS_VER ?= 22.04
+OS_BASE ?= julia
+OS_VER ?= latest
 
 USER ?= `whoami`
 USERID := `id -u`
@@ -26,11 +26,11 @@ test: test_docker test_singularity
 
 test_docker:
 	@echo "Testing docker image: $(IMAGE)"
-	@docker run -it -v /mnt:/mnt $(IMAGE)
+	@docker run -it -v /mnt:/mnt $(IMAGE) --version
 
 test_singularity: $(PROJECT_NAME).sif
 	@echo "Testing singularity image: $(PROJECT_NAME).sif"
-	@apptainer run $(PROJECT_NAME).sif
+	@apptainer run $(PROJECT_NAME).sif --version
 
 clean:
 	@docker rmi -f --no-prune $(IMAGE)

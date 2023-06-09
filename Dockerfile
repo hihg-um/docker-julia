@@ -31,14 +31,8 @@ RUN apt -y update -qq && apt -y upgrade && \
 		git \
 		less
 
-FROM base as builder
-RUN DEBIAN_FRONTEND=noninteractive apt -y install \
-		git
-
-FROM julia:latest
-
 WORKDIR /app
-COPY . .
+COPY src/ .
 
 RUN julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
 
