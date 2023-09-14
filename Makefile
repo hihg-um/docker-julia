@@ -16,7 +16,7 @@ IMAGE := $(ORG_NAME)/$(USER)/$(PROJECT_NAME):latest
 GIT_HASH ?= $(shell git log --format="%h" -n 1)
 
 # Use this for debugging builds. Turn off for a more slick build log
-DOCKER_BUILD_ARGS := --progress=plain
+DOCKER_BUILD_ARGS :=
 
 .PHONY: all build clean docker test test_docker test_singularity
 
